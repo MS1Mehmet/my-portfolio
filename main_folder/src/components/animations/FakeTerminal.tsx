@@ -34,7 +34,7 @@ const FakeTerminal = () => {
       <div className={styles.terminal}>
         <pre className={styles.output}>
           {displayedMessages.map((msg, i) => {
-            const [textPart, dots] = msg.split('...');
+            const [textPart] = msg.split('...');
             return (
               <div key={i}>
                 {textPart}
