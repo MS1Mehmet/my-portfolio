@@ -17,7 +17,7 @@ export default function Home() {
   return (
     
     <IntroProvider>
-   
+      <Intro/>
       <Backgrounds/>
       <Navbar/>
       <Header/>
