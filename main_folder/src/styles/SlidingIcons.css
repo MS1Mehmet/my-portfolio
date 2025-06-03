@@ -1,0 +1,29 @@
+.logos {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 60px 0;
+  background: transparent; /* kein Hintergrund */
+}
+
+.logos-slide {
+  display: inline-flex;
+  animation: slide 2s linear infinite;
+  will-change: transform;
+}
+
+.logos-slide img {
+  height: 50px;
+  margin: 0 40px;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
