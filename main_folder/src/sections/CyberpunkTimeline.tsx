@@ -1,5 +1,5 @@
-
 import React from 'react';
+import Image from 'next/image';
 
 const stations = [
   {
@@ -39,10 +39,12 @@ const CyberpunkTimeline = () => (
           <div key={idx} className="flex flex-col items-center">
             {/* Icon */}
             <div className="w-16 h-16 xl:w-24 xl:h-24 flex items-center justify-center rounded-lg border-2 border-cyan-400 shadow-lg bg-[#112240] text-cyan-400 text-2xl">
-              <img
+              <Image
                 src={timeline[idx].image}
                 alt={`Icon für ${station.title}`}
                 className="w-10 h-10 xl:w-16 xl:h-16"
+                width={16}
+                height={16}
               />
             </div>
 

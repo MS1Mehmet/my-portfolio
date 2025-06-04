@@ -1,8 +1,5 @@
-
 import { FC } from "react";
-import Image from "next/image";
 import GridDistortion from "@/components/animations/GridDistortion";
-
 import InfiniteLogoSlider from "@/components/animations/InfiniteLogoSlider";
 
 const About: FC = () => {

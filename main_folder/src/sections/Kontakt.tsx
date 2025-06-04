@@ -1,5 +1,6 @@
 
 import { FC } from "react";
+import Image from 'next/image';
 
 const Kontakt: FC = () => {
   return <section id="Kontakt" className="w-full lg:mt-10 px-6 lg:py-24 flex flex-col items-center text-center z-20">
@@ -18,10 +19,10 @@ const Kontakt: FC = () => {
   <div className="flex gap-6 mt-10">
     {/* Beispiel-Icons: */}
     <a href="https://github.com/MS1Mehmet" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400">
-     <img src="/GitHub.svg"  className="width "/>
+     <Image src="/GitHub.svg" className="width " alt={"Das Logo von Github"} width={128} height={128}/>
     </a>
     <a href="https://www.youtube.com/watch?v=fuWZkY3xrUk&ab_channel=Cyberzs" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400">
-      <img src="/youtube.svg"  className="width "/>
+      <Image src="/youtube.svg" className="width " alt={"Das Logo von Youtube"} width={128} height={128}/>
     </a>
     {/* weitere Links bei Bedarf */}
   </div>

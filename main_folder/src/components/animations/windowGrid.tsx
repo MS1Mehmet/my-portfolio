@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 
 export default function WindowGrid() {
   // Ursprungspositionen: 4 horizontale + 6 vertikale Linien
-  const initialY = [-5, 250, 650, 1000];
-  const initialX = [-5, 450, 950, 1450, 1915];
+  const initialY = React.useMemo(() => [-5, 250, 650, 1000], []);
+  const initialX = React.useMemo(() => [-5, 450, 950, 1450, 1915], []);
 
   const [posY, setPosY] = useState([...initialY]);
   const [posX, setPosX] = useState([...initialX]);
@@ -33,72 +33,75 @@ export default function WindowGrid() {
     return () => cancelAnimationFrame(animationRef.current!);
   }, []);
 
-  // Hover-Handler
-  useEffect(() => {
-    const handleMouseEnter = (e: MouseEvent) => {
-      const btn = e.currentTarget as HTMLElement;
-      const rect = btn.getBoundingClientRect();
-      const top = rect.top;
-      const bottom = rect.bottom;
-      const left = rect.left;
-      const right = rect.right;
+useEffect(() => {
+  const handleMouseEnter = (e: MouseEvent) => {
+    const btn = e.currentTarget as HTMLElement;
+    const rect = btn.getBoundingClientRect();
+    const top = rect.top;
+    const bottom = rect.bottom;
+    const left = rect.left;
+    const right = rect.right;
 
-      // Y-Achse: finde nächsten ober- und unterhalb
-      let minTop = Infinity, minBot = Infinity;
-      let idxTop: number | null = null, idxBot: number | null = null;
-      posY.forEach((y, i) => {
-        if (y < top) {
-          const d = top - y;
-          if (d < minTop) { minTop = d; idxTop = i; }
-        } else if (y > bottom) {
-          const d = y - bottom;
-          if (d < minBot) { minBot = d; idxBot = i; }
-        }
-      });
-      if (idxTop !== null) targetY.current[idxTop] = top - 10;
-      if (idxBot !== null) targetY.current[idxBot] = bottom + 10;
-      activeY.current = [idxTop, idxBot];
-
-      // X-Achse: finde nächsten links- und rechtsseitig
-      let minLeft = Infinity, minRight = Infinity;
-      let idxLeft: number | null = null, idxRight: number | null = null;
-      posX.forEach((x, i) => {
-        if (x < left) {
-          const d = left - x;
-          if (d < minLeft) { minLeft = d; idxLeft = i; }
-        } else if (x > right) {
-          const d = x - right;
-          if (d < minRight) { minRight = d; idxRight = i; }
-        }
-      });
-      if (idxLeft !== null) targetX.current[idxLeft] = left - 10;
-      if (idxRight !== null) targetX.current[idxRight] = right + 10;
-      activeX.current = [idxLeft, idxRight];
-    };
-
-    const handleMouseLeave = () => {
-      // Y zurücksetzen
-      const [yt, yb] = activeY.current;
-      if (yt !== null) targetY.current[yt] = initialY[yt];
-      if (yb !== null) targetY.current[yb] = initialY[yb];
-      activeY.current = [null, null];
-      // X zurücksetzen
-      const [xl, xr] = activeX.current;
-      if (xl !== null) targetX.current[xl] = initialX[xl];
-      if (xr !== null) targetX.current[xr] = initialX[xr];
-      activeX.current = [null, null];
-    };
-
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(btn => {
-      btn.addEventListener('mouseenter', handleMouseEnter as EventListener);
-      btn.addEventListener('mouseleave', handleMouseLeave as EventListener);
+    // Y-Achse: finde nächsten ober- und unterhalb (nutze targetY.current)
+    let minTop = Infinity, minBot = Infinity;
+    let idxTop: number | null = null, idxBot: number | null = null;
+    targetY.current.forEach((y, i) => {
+      if (y < top) {
+        const d = top - y;
+        if (d < minTop) { minTop = d; idxTop = i; }
+      } else if (y > bottom) {
+        const d = y - bottom;
+        if (d < minBot) { minBot = d; idxBot = i; }
+      }
     });
-    return () => buttons.forEach(btn => {
+    if (idxTop !== null) targetY.current[idxTop] = top - 10;
+    if (idxBot !== null) targetY.current[idxBot] = bottom + 10;
+    activeY.current = [idxTop, idxBot];
+
+    // X-Achse: finde nächsten links- und rechtsseitig (nutze targetX.current)
+    let minLeft = Infinity, minRight = Infinity;
+    let idxLeft: number | null = null, idxRight: number | null = null;
+    targetX.current.forEach((x, i) => {
+      if (x < left) {
+        const d = left - x;
+        if (d < minLeft) { minLeft = d; idxLeft = i; }
+      } else if (x > right) {
+        const d = x - right;
+        if (d < minRight) { minRight = d; idxRight = i; }
+      }
+    });
+    if (idxLeft !== null) targetX.current[idxLeft] = left - 10;
+    if (idxRight !== null) targetX.current[idxRight] = right + 10;
+    activeX.current = [idxLeft, idxRight];
+  };
+
+  const handleMouseLeave = () => {
+    const [yt, yb] = activeY.current;
+    if (yt !== null) targetY.current[yt] = initialY[yt];
+    if (yb !== null) targetY.current[yb] = initialY[yb];
+    activeY.current = [null, null];
+
+    const [xl, xr] = activeX.current;
+    if (xl !== null) targetX.current[xl] = initialX[xl];
+    if (xr !== null) targetX.current[xr] = initialX[xr];
+    activeX.current = [null, null];
+  };
+
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(btn => {
+    btn.addEventListener('mouseenter', handleMouseEnter as EventListener);
+    btn.addEventListener('mouseleave', handleMouseLeave as EventListener);
+  });
+
+  return () => {
+    buttons.forEach(btn => {
       btn.removeEventListener('mouseenter', handleMouseEnter as EventListener);
       btn.removeEventListener('mouseleave', handleMouseLeave as EventListener);
     });
-  }, [posY, posX]);
+  };
+}, [initialX,initialY]); // leeres Dependency-Array!
+
+
 
   return (
     <>

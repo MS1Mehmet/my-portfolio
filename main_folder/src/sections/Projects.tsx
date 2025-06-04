@@ -3,6 +3,7 @@ import { FC } from "react";
 import "../styles/rainbowBorder.css";
 import "../styles/glitchText.css";
 import DecryptedText from "@/components/animations/DecryptedText";
+import Image from 'next/image';
 
 const projects = [
   {
@@ -36,10 +37,11 @@ const Projects: FC = () => {
         {/* Bild links 49% */}
         <div className=" lg:w-[90%] box-border">
           <div className="aspect-[16/9] rounded-2xl rainbow-wrapper px-1 pt-1">
-            <img
+            <Image
               src={projects[0].image}
               alt={projects[0].name}
               className="w-full h-full object-cover rounded-2xl"
+              fill
             />
           </div>
         </div>
@@ -84,10 +86,11 @@ const Projects: FC = () => {
                 {/*Image*/}
         <div className="w-full lg:w-[47%] box-border">
           <div className="aspect-[16/9] rounded-2xl rainbow-wrapper px-1 py-1">
-            <img
+            <Image
               src={projects[1].image}
               alt={projects[1].name}
               className="w-full h-full object-cover rounded-2xl"
+              fill
             />
           </div>
         </div>

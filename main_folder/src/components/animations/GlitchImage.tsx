@@ -1,12 +1,13 @@
 'use client';
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import { PowerGlitch } from "powerglitch";
+import Image from "next/image";
 
 export interface GlitchImageHandle {
   startGlitch: () => void;
 }
 
-const GlitchImage = forwardRef<GlitchImageHandle>((props, ref) => {
+const GlitchImage = forwardRef<GlitchImageHandle>((_props, ref) => {
   const divRef = useRef<HTMLDivElement>(null);
   const glitchInstanceRef = useRef<{ startGlitch: () => void } | null>(null);
 
@@ -34,18 +35,16 @@ const GlitchImage = forwardRef<GlitchImageHandle>((props, ref) => {
         height: "100vh",
         gridTemplateRows: "1fr",
         gridTemplateColumns: "1fr",
+        position: "relative", // Wichtig für layout="fill"
       }}
     >
-      <img
-        src="/pictures/glitch-pic.jpg"
-        alt="Glitch"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          display: "block",
-        }}
-      />
+      <Image
+      src="/pictures/glitch-pic.jpg"
+      alt="Glitch"
+      fill
+      className="object-cover"
+      priority
+    />
     </div>
   );
 });
