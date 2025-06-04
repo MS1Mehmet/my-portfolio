@@ -11,7 +11,15 @@
   left: -4px;
   right: -4px;
   bottom: -4px;
-  border-radius: 1.25rem; /* minimal größer für außen */
+  border-radius: 1.25rem;
+  /* Default: keine Animation + transparent */
+  background: transparent;
+  animation: none;
+  filter: none;
+  z-index: -1;
+}
+
+.rainbow-wrapper.show-border::before {
   background: linear-gradient(
     45deg,
     #ff0000,
@@ -25,9 +33,10 @@
   );
   background-size: 300% 300%;
   animation: rainbowBorder 6s linear infinite;
-  z-index: -1;
   filter: blur(4px);
 }
+
+
 
 @keyframes rainbowBorder {
   0% {

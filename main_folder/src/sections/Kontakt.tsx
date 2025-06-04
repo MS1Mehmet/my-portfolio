@@ -1,8 +1,15 @@
 
+'use client'
 import { FC } from "react";
 import Image from 'next/image';
+import { useIntro } from "@/components/handler/IntroContent";
 
 const Kontakt: FC = () => {
+
+    const { introDone } = useIntro(); // Zustand aus dem Context holen
+  
+    if (!introDone) return null; // ⛔️ Hero wird erst angezeigt, wenn Intro abgeschlossen ist
+
   return <section id="Kontakt" className="w-full lg:mt-10 px-6 lg:py-24 flex flex-col items-center text-center z-20">
   <h2 className="text-4xl md:text-6xl font-oxanium font-bold text-white mb-6 glitch-text" data-glitch="Kontakt">Kontakt</h2>
   

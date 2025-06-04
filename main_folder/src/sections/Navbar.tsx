@@ -3,7 +3,11 @@ import { FC, useState } from "react";
 import "../styles/NavbarStyle.css";
 import { GlitchButton } from "@/components/buttons/GlitchButton";
 
+
 const Navbar: FC = () => {
+
+
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleScrollToSection = (index: number, sectionId: string) => {

@@ -4,7 +4,6 @@ import GlitchImage, { GlitchImageHandle } from '@/components/animations/GlitchIm
 import FakeTerminal from '@/components/animations/FakeTerminal';
 import EncryptButton from '@/components/buttons/encryptButton';
 import { useIntro } from '@/components/handler/IntroContent';
-import Image from 'next/image';
 
 export default function Intro() {
   const glitchRef = useRef<GlitchImageHandle>(null);
@@ -46,11 +45,10 @@ export default function Intro() {
     <div className="fixed w-full h-screen z-80">
       {/* Hintergrundbild */}
       <div className="absolute inset-0 z-50">
-        <Image
+        <img
           src="/pictures/glitch-pic.jpg"
           className="w-full h-full object-cover"
           alt="Hintergrund"
-          fill
         />
       </div>
 

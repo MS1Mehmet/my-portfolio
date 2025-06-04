@@ -1,8 +1,11 @@
+'use client'
 import { FC } from "react";
 import GridDistortion from "@/components/animations/GridDistortion";
 import InfiniteLogoSlider from "@/components/animations/InfiniteLogoSlider";
 
+
 const About: FC = () => {
+
   return (
 <div className="relative flex flex-col items-center justify-center min-h-screen px-4 mt-8"
     id="About">
@@ -11,7 +14,7 @@ const About: FC = () => {
       <div className="flex flex-col 2xl:flex-row w-full box-border px-2 gap-4">
        
         <div className=" lg:w-[90%] box-border lg:pl-12">
-          <div className="aspect-[16/9] rounded-2xl rainbow-wrapper px-0.5 pt-0.5 ">
+          <div className="aspect-[16/9] rounded-2xl rainbow-wrapper show-border  px-0.5 pt-0.5 ">
               <GridDistortion
               imageSrc="/test.jpg"
               grid={40}

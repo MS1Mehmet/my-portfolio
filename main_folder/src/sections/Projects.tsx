@@ -4,6 +4,7 @@ import "../styles/rainbowBorder.css";
 import "../styles/glitchText.css";
 import DecryptedText from "@/components/animations/DecryptedText";
 import Image from 'next/image';
+import { useIntro } from "@/components/handler/IntroContent";
 
 const projects = [
   {
@@ -27,6 +28,11 @@ const projects = [
 ];
 
 const Projects: FC = () => {
+
+    const { introDone } = useIntro(); // Zustand aus dem Context holen
+  
+    if (!introDone) return null; // ⛔️ Hero wird erst angezeigt, wenn Intro abgeschlossen ist
+
   return (
     <div
       id="Projects"
@@ -36,7 +42,7 @@ const Projects: FC = () => {
       <div className="flex flex-col lg:flex-row w-full box-border px-2 gap-4">
         {/* Bild links 49% */}
         <div className=" lg:w-[90%] box-border">
-          <div className="aspect-[16/9] rounded-2xl rainbow-wrapper px-1 pt-1">
+          <div className="aspect-[16/9] rounded-2xl rainbow-wrapper show-border px-1 pt-1">
             <Image
               src={projects[0].image}
               alt={projects[0].name}
@@ -85,7 +91,7 @@ const Projects: FC = () => {
         
                 {/*Image*/}
         <div className="w-full lg:w-[47%] box-border">
-          <div className="aspect-[16/9] rounded-2xl rainbow-wrapper px-1 py-1">
+          <div className="aspect-[16/9] rounded-2xl rainbow-wrapper show-border px-1 py-1">
             <Image
               src={projects[1].image}
               alt={projects[1].name}

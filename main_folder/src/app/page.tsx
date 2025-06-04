@@ -22,9 +22,9 @@ export default function Home() {
       <Navbar/>
       <Header/>
       <Hero/>
-      <About/>
+
       <CyberpunkTimeline/>
-      <Projects/>
+     
       <Kontakt/>
       <Footer/>
       </IntroProvider>
