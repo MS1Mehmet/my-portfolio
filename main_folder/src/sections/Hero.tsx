@@ -12,7 +12,7 @@ const Hero: FC = () => {
   if (!introDone) return null; // ⛔️ Hero wird erst angezeigt, wenn Intro abgeschlossen ist
 
   return (
-    <section id="Home" className="flex items-center justify-center pb-12 z-20 sm:mb-40">
+    <section id="Home" className="flex items-center justify-center pb-12 z-20 sm:mb-40 w-full h-screen">
       <div className="flex justify-center items-center
         sm:w-[360px]
         md:w-[767px]
